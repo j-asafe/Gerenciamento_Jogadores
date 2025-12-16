@@ -28,7 +28,6 @@ h1, h2 {
     margin-bottom: 20px;
 }
 
-/* FORM */
 form {
     display: flex;
     flex-wrap: wrap;
@@ -63,7 +62,6 @@ button[type="submit"] {
     color: #fff;
 }
 
-/* TABELA */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -79,7 +77,6 @@ th {
     background: #f0f0f0;
 }
 
-/* BOTÕES */
 .btn-edit {
     background: #16a34a;
     color: #fff;
@@ -90,12 +87,19 @@ th {
     color: #fff;
 }
 
-/* MENSAGEM */
 #mensagem {
     margin-top: 10px;
-    color: #16a34a;
     font-weight: bold;
 }
+
+.msg-success {
+    color: #16a34a;
+}
+
+.msg-error {
+    color: #dc2626;
+}
+
 </style>
 </head>
 
@@ -145,7 +149,7 @@ th {
 
 </div>
 
-<!-- JS ORIGINAL (NÃO ALTERADO) -->
+
 <script>
 const apiUrl = "https://apifutebol.webapptech.site/api";
 const tabela = document.querySelector("#tabelaJogadores tbody");
@@ -207,7 +211,10 @@ form.addEventListener('submit', function(e){
     })
     .then(res => res.json())
     .then(() => {
-        msg.innerHTML = 'Jogador salvo com sucesso';
+        msg.className = 'msg-success';
+        msg.innerHTML = editId
+            ? 'Jogador atualizado com sucesso'
+            : 'Jogador cadastrado com sucesso';
         form.reset();
         editId = null;
         cancelEdit.style.display = 'none';
@@ -238,9 +245,14 @@ cancelEdit.addEventListener('click', () => {
 
 function deletar(id){
     if(!confirm('Deseja realmente deletar este jogador?')) return;
+
     fetch(`${apiUrl}/delJogadores/${id}`, { method: 'DELETE' })
         .then(res => res.json())
-        .then(() => listarJogadores());
+        .then(() => {
+            msg.className = 'msg-error';
+            msg.innerHTML = 'Jogador deletado com sucesso';;
+            listarJogadores();
+        });
 }
 
 listarJogadores();
