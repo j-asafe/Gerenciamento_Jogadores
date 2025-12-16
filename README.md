@@ -11,6 +11,7 @@ Editar:
 <img width="978" height="467" alt="image" src="https://github.com/user-attachments/assets/12e7ac64-e147-4eb6-aded-4e7b0aa6ac06" />
 
 Deletar:
+
 <img width="919" height="442" alt="image" src="https://github.com/user-attachments/assets/1fa31b09-b261-459e-a43f-9894ccbc5982" />
 
 
